@@ -1,0 +1,8 @@
+#game {
+    height: 50vh;
+    width: 50vh;
+    border: 1vh solid black;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows:  1fr 1fr 1fr;
+}
