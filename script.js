@@ -1,3 +1,15 @@
+const player = (name, symbol) => {
+
+    const getSymbol = () => symbol;
+    const getName = () => name;
+
+    const changeName = (newName) => {
+        name = newName;
+    }
+
+    return {getSymbol, getName, changeName}
+}
+
 const gameboard = (() => {
 
     const board =  [["", "", ""],
@@ -63,15 +75,25 @@ const gameboard = (() => {
 const game = (() => {
 
     let turn = 1;
+    let gameStart = false;
     let gameEnd = false;
     const board = gameboard.board;
+    let player1 = player("Player 1", "X");
+    let player2 = player("Player 2", "O");
+
+    const start = () => {
+        player1.changeName(document.querySelector("#player1").value);
+        player2.changeName(document.querySelector("#player2").value);
+        gameStart = true;
+        gameEnd = false;
+    }
 
     const round = (id) => {
 
         let row = gameboard.getRow(id);
         let index = gameboard.getIndex(id);
 
-        if (gameEnd == false) {
+        if (gameEnd === false && gameStart === true) {
             if (turn == 1) {
                 if (checkValid(row, index) == true) {
                     gameboard.board[row][index] = player1.getSymbol(); 
@@ -128,24 +150,18 @@ const game = (() => {
         }
     }
 
-    return {round};
+    return {round, start};
 
 })();
 
-const player = (name, symbol) => {
-
-    const getSymbol = () => symbol;
-    const getName = () => name;
-
-    const changeName = () => {
-        name = prompt("New Name?");
-    }
-
-    return {getSymbol, getName, changeName}
+window.onload = function(){
+    const startBtn = document.getElementById("start");
+    startBtn.addEventListener("click", function(){
+        game.start();
+        gameboard.reset();
+    });
+    gameboard.draw();
 }
 
-const player1 = player("Player 1", "X");
-const player2 = player("Player 2", "O")
 
-const container = document.querySelector("#game")
-container.onload = gameboard.draw();
+
