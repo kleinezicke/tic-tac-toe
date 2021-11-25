@@ -8,8 +8,10 @@ const gameboard = (() => {
         for (let i = 0; i < 9; i++) {
             const box = document.createElement("div");
             const container = document.querySelector("#game");
+            
             box.classList.add("box");
             box.id = `box${i+1}`;
+
             box.addEventListener("click", function() {
                 game.round(box.id);
             })
@@ -51,6 +53,7 @@ const gameboard = (() => {
 const game = (() => {
 
     let turn = 1;
+    let gameEnd = false;
     const board = gameboard.board;
 
     const round = (id) => {
