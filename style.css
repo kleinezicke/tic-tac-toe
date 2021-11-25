@@ -1,3 +1,7 @@
+h1 {
+    text-align: center;
+}
+
 #game {
     height: 50vh;
     width: 50vh;
@@ -5,9 +9,14 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows:  1fr 1fr 1fr;
+    margin: auto;
 }
 
 .box {
-    text-align: center;
     font-size: 10vh;
+    display: flex;
+}
+
+span {
+    margin: auto;
 }

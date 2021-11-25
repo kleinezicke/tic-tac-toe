@@ -46,7 +46,17 @@ const gameboard = (() => {
             return index - 6;
     }
 
-    return {board, draw, getRow, getIndex};
+    const reset = () => {
+        for (let i = 0; i < 3; i++) {
+            board[i] = ["", "", ""]
+        }
+        const boxes = document.querySelectorAll(".box")
+        boxes.forEach(element => {
+            element.innerHTML = "";
+        });
+    }
+
+    return {board, draw, getRow, getIndex, reset};
 
 })();
 
@@ -65,16 +75,16 @@ const game = (() => {
         if (turn == 1) {
             if (checkValid(row, index) == true) {
                 gameboard.board[row][index] = player1.getSymbol(); 
-                document.getElementById(id).textContent = player1.getSymbol();
-                checkWin();
+                document.getElementById(id).innerHTML = "<span>" + player1.getSymbol() + "</span>";
+                checkWin(player1);
                 turn = 2;
             }
         }
         else {
             if (checkValid(row, index) == true) {
                 gameboard.board[row][index] = player2.getSymbol();
-                document.getElementById(id).textContent = player2.getSymbol();
-                checkWin();
+                document.getElementById(id).innerHTML = "<span>" + player2.getSymbol() + "</span>";
+                checkWin(player2);
                 turn = 1;
             }
         }
@@ -91,16 +101,18 @@ const game = (() => {
             return false;
     }
 
-    const checkWin = () => {
+    const checkWin = (player) => {
+
+        const winMessage = player.getName() + " wins!";
 
         for (let i = 0; i < 3; i++) {
             if (gameboard.board[i][0] === gameboard.board[i][1] && gameboard.board[i][0] === gameboard.board[i][2] && gameboard.board[i][0] != "") {
-                alert("You win!")
+                alert(winMessage);
                 return true;
             }
 
             if (gameboard.board[0][i] === gameboard.board[1][i] && gameboard.board[0][i] === gameboard.board[2][i] && gameboard.board[0][i] != "") {
-                alert("You win!");
+                alert(winMessage);
                 return true;
             }
         }
