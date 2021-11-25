@@ -17,6 +17,10 @@ h1 {
     display: flex;
 }
 
+.box:hover {
+    background-color: lightgray;
+}
+
 span {
     margin: auto;
 }

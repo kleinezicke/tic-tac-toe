@@ -71,21 +71,22 @@ const game = (() => {
         let row = gameboard.getRow(id);
         let index = gameboard.getIndex(id);
 
-
-        if (turn == 1) {
-            if (checkValid(row, index) == true) {
-                gameboard.board[row][index] = player1.getSymbol(); 
-                document.getElementById(id).innerHTML = "<span>" + player1.getSymbol() + "</span>";
-                checkWin(player1);
-                turn = 2;
+        if (gameEnd == false) {
+            if (turn == 1) {
+                if (checkValid(row, index) == true) {
+                    gameboard.board[row][index] = player1.getSymbol(); 
+                    document.getElementById(id).innerHTML = "<span>" + player1.getSymbol() + "</span>";
+                    checkWin(player1);
+                    turn = 2;
+                }
             }
-        }
-        else {
-            if (checkValid(row, index) == true) {
-                gameboard.board[row][index] = player2.getSymbol();
-                document.getElementById(id).innerHTML = "<span>" + player2.getSymbol() + "</span>";
-                checkWin(player2);
-                turn = 1;
+            else {
+                if (checkValid(row, index) == true) {
+                    gameboard.board[row][index] = player2.getSymbol();
+                    document.getElementById(id).innerHTML = "<span>" + player2.getSymbol() + "</span>";
+                    checkWin(player2);
+                    turn = 1;
+                }
             }
         }
     }
@@ -105,7 +106,7 @@ const game = (() => {
 
         const displayWin = () => {
             const winMessage = player.getName() + " wins!";
-
+            gameEnd = true;
             alert(winMessage);
         }
 
