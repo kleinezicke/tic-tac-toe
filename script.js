@@ -103,18 +103,27 @@ const game = (() => {
 
     const checkWin = (player) => {
 
-        const winMessage = player.getName() + " wins!";
+        const displayWin = () => {
+            const winMessage = player.getName() + " wins!";
+
+            alert(winMessage);
+        }
 
         for (let i = 0; i < 3; i++) {
             if (gameboard.board[i][0] === gameboard.board[i][1] && gameboard.board[i][0] === gameboard.board[i][2] && gameboard.board[i][0] != "") {
-                alert(winMessage);
-                return true;
+                displayWin();
             }
 
             if (gameboard.board[0][i] === gameboard.board[1][i] && gameboard.board[0][i] === gameboard.board[2][i] && gameboard.board[0][i] != "") {
-                alert(winMessage);
-                return true;
+                displayWin();
             }
+        }
+
+        if (gameboard.board[0][0] === gameboard.board[1][1] && gameboard.board[0][0] === gameboard.board[2][2] && gameboard.board[0][0] != "") {
+            displayWin();
+        }
+        else if (gameboard.board[0][2] === gameboard.board[1][1] && gameboard.board[0][2] === gameboard.board[2][0] && gameboard.board[0][2] != "") {
+            displayWin();
         }
     }
 
