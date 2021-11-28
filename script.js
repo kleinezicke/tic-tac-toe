@@ -99,6 +99,7 @@ const game = (() => {
                     gameboard.board[row][index] = player1.getSymbol(); 
                     document.getElementById(id).innerHTML = "<span>" + player1.getSymbol() + "</span>";
                     checkWin(player1);
+                    checkTie();
                     turn = 2;
                 }
             }
@@ -107,6 +108,7 @@ const game = (() => {
                     gameboard.board[row][index] = player2.getSymbol();
                     document.getElementById(id).innerHTML = "<span>" + player2.getSymbol() + "</span>";
                     checkWin(player2);
+                    checkTie();
                     turn = 1;
                 }
             }
@@ -148,6 +150,20 @@ const game = (() => {
         else if (gameboard.board[0][2] === gameboard.board[1][1] && gameboard.board[0][2] === gameboard.board[2][0] && gameboard.board[0][2] != "") {
             displayWin();
         }
+    }
+
+    const checkTie = () => {
+        const displayTie = () => {
+            const tieMessage = "It's a tie!"
+            gameEnd = true;
+            alert(tieMessage);
+        }
+
+        if (gameboard.board[0].indexOf("") === -1 && gameboard.board[1].indexOf("") === -1 && gameboard.board[2].indexOf("") === -1) {
+            displayTie();
+        }
+            
+        
     }
 
     return {round, start};
